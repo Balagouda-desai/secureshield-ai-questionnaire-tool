@@ -1,5 +1,15 @@
 # SecureShield AI – Questionnaire Answering Tool
 
+## Live Application
+
+https://secureshield-ai-questionnaire-tool.onrender.com
+
+---
+
+## Repository
+
+https://github.com/Balagouda-desai/secureshield-ai-questionnaire-tool
+
 ## Project Overview
 
 This project is an AI-powered tool that automatically answers structured questionnaires using internal reference documents.
@@ -9,6 +19,17 @@ The system simulates a real-world workflow where companies receive security, com
 The tool parses questionnaire questions, retrieves relevant information from reference documents, and generates answers with citations.
 
 ---
+
+## Application Screenshots
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### AI Generated Answers
+![Results](screenshots/results1.png)
+
+### Coverage Summary & Evidence
+![Summary](screenshots/results2.png)
 
 ## Industry & Company Context
 
@@ -121,12 +142,3 @@ Possible future enhancements:
 
 ---
 
-## Live Application
-
-https://secureshield-ai-questionnaire-tool.onrender.com
-
----
-
-## Repository
-
-https://github.com/Balagouda-desai/secureshield-ai-questionnaire-tool
