@@ -5,9 +5,14 @@ from utils.retriever import load_reference_documents, chunk_documents, create_em
 import sqlite3
 import os
 from docx import Document
-from flask import send_file
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
+from init_db import init_db
 
 app = Flask(__name__)
+
+# initialize database (important for Render deployment)
+init_db()
+
 app.secret_key = "supersecretkey"  # change later
 
 DATABASE = "database.db"
