@@ -1,16 +1,21 @@
 import sqlite3
 
-conn = sqlite3.connect("database.db")
+def init_db():
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
 
-conn.execute("""
-CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL,
-    password TEXT NOT NULL
-)
-""")
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE,
+        password TEXT
+    )
+    """)
 
-conn.commit()
-conn.close()
+    conn.commit()
+    conn.close()
 
-print("Database initialized.")
+
+# Run automatically if file is executed
+if __name__ == "__main__":
+    init_db()
