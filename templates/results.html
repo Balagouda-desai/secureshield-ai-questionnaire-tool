@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Questionnaire Results</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f6f8fb;
+}
+
+.card-summary{
+background:white;
+border-radius:10px;
+box-shadow:0px 2px 10px rgba(0,0,0,0.05);
+}
+
+textarea{
+width:100%;
+height:90px;
+resize:none;
+}
+
+.conf-high{
+color:green;
+font-weight:bold;
+}
+
+.conf-mid{
+color:#d97706;
+font-weight:bold;
+}
+
+.conf-low{
+color:red;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<h2 class="mb-4">AI Questionnaire Answering Tool</h2>
+
+
+<!-- Coverage Summary -->
+
+<div class="card card-summary p-4 mb-4">
+
+<h5>Coverage Summary</h5>
+
+<div class="row mt-3">
+
+<div class="col-md-4">
+<strong>Total Questions</strong>
+<p>{{ total_questions }}</p>
+</div>
+
+<div class="col-md-4">
+<strong>Answered with Citations</strong>
+<p>{{ answered }}</p>
+</div>
+
+<div class="col-md-4">
+<strong>Not Found</strong>
+<p>{{ not_found }}</p>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- Results Table -->
+
+<div class="card p-4">
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-light">
+
+<tr>
+<th style="width:20%">Question</th>
+<th style="width:25%">Answer</th>
+<th style="width:20%">Evidence</th>
+<th style="width:15%">Citation</th>
+<th style="width:10%">Confidence</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for item in results %}
+
+<tr>
+
+<td>{{ item.question }}</td>
+
+<td>
+<textarea class="form-control">{{ item.answer }}</textarea>
+</td>
+
+<td>{{ item.evidence }}</td>
+
+<td><span class="badge bg-secondary">{{ item.citation }}</span></td>
+
+<td>
+
+{% if item.confidence > 0.7 %}
+<span class="conf-high">{{ "%.2f"|format(item.confidence) }}</span>
+
+{% elif item.confidence > 0.5 %}
+<span class="conf-mid">{{ "%.2f"|format(item.confidence) }}</span>
+
+{% else %}
+<span class="conf-low">{{ "%.2f"|format(item.confidence) }}</span>
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+
+<div class="mt-4 d-flex gap-3">
+
+<form action="/export_answers" method="post">
+<button class="btn btn-primary">Download Answered Questionnaire</button>
+</form>
+
+<a href="/dashboard" class="btn btn-outline-secondary">Back to Dashboard</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
