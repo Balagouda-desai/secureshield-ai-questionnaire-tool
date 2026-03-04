@@ -4,8 +4,15 @@ from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-# load embedding model
-model = SentenceTransformer("all-MiniLM-L6-v2")
+# Lazy load model (fix for Render memory issue)
+model = None
+
+
+def get_model():
+    global model
+    if model is None:
+        model = SentenceTransformer("all-MiniLM-L6-v2")
+    return model
 
 
 # 1️⃣ Load reference documents
@@ -54,6 +61,8 @@ def chunk_documents(documents, chunk_size=200):
 # 3️⃣ Create embeddings for chunks
 def create_embeddings(chunks):
 
+    model = get_model()
+
     texts = [chunk["text"] for chunk in chunks]
 
     embeddings = model.encode(texts)
@@ -63,6 +72,8 @@ def create_embeddings(chunks):
 
 # 4️⃣ Find best matching chunk for a question
 def find_best_match(question, chunks, chunk_embeddings):
+
+    model = get_model()
 
     question_embedding = model.encode([question])
 
