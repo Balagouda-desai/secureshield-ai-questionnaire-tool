@@ -116,6 +116,9 @@ def generate_answers():
     # get questionnaire file
     questionnaire_folder = "uploads/questionnaires"
 
+# ensure folder exists
+    os.makedirs(questionnaire_folder, exist_ok=True)
+
     files = os.listdir(questionnaire_folder)
 
     if not files:
@@ -130,6 +133,9 @@ def generate_answers():
     # load reference documents
     reference_folder = "uploads/references"
 
+    # ensure folder exists
+    os.makedirs(reference_folder, exist_ok=True)
+    
     documents = load_reference_documents(reference_folder)
 
 
