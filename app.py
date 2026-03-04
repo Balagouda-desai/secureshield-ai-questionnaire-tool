@@ -15,7 +15,7 @@ init_db()
 
 app.secret_key = "supersecretkey"  # change later
 
-DATABASE = "database.db"
+DATABASE = os.path.join(os.getcwd(), "database.db")
 
 def get_db_connection():
     conn = sqlite3.connect(DATABASE)
